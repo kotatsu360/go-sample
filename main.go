@@ -1,7 +1,7 @@
 package main
 
 import (
-	"os"
+	// "os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/logger"
@@ -14,15 +14,14 @@ import "net/http"
 func main() {
 
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
-	log.Logger = log.Output(
-		zerolog.ConsoleWriter{
-			Out:     os.Stdout,
-		},
-	)
 	r := gin.New()
 
+	r.GET("/", logger.SetLogger() , func(c *gin.Context) {
 
-	r.GET("/", logger.SetLogger(), func(c *gin.Context) {
+    log.Warn().
+        Str("foo", "bar").
+        Msg("hoge")
+
 		c.JSON(http.StatusOK, gin.H{
 			"message": "hello world",
 		})
