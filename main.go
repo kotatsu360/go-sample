@@ -20,7 +20,7 @@ func main() {
 
     log.Warn().
       Str("foo", "bar").
-      Msg("hoge")
+      Msg("/")
 
     c.JSON(http.StatusOK, gin.H{
       "message": "hello world",
@@ -28,6 +28,11 @@ func main() {
   })
 
   r.GET("/api/health", func(c *gin.Context) {
+
+    log.Warn().
+      Str("foo", "bar").
+      Msg("/api/health")
+
     c.JSON(http.StatusOK, gin.H{
       "message": "ok",
     })
